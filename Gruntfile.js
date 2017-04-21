@@ -73,6 +73,15 @@ module.exports = function (grunt) {
 					dest: sTarget
 				}]
 			},
+			pages: {
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: "target",
+					src: ["src/**", "sample/**"],
+					dest: "pages"
+				}]
+			},
 			save: {
 				files: [{
 					src: sSaveFile ? sSaveFile : [],
@@ -131,7 +140,7 @@ module.exports = function (grunt) {
 			src : {
 				src: ['src/**/*.js', 'README.md'],
 				options: {
-					destination : "pages",
+					destination : "pages/jsdoc",
 					template : "node_modules/ink-docstrap/template",
 					configure : ".jsdoc.json"
 				}
@@ -182,5 +191,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['clean:target', 'babel:target', 'copy:target', 'replace:target']);
 	grunt.registerTask('default', ['build', 'start']);
 	grunt.registerTask('save', ['copy:save', 'babel:save']);
-	grunt.registerTask('dist', ['build', 'clean:dist', 'openui5_preload', 'uglify', 'copy:dist', 'compress', 'jsdoc']);
+	grunt.registerTask('dist', ['build', 'clean:dist', 'openui5_preload', 'uglify', 'copy:dist', 'compress',
+		'jsdoc', 'copy:pages']);
 };
