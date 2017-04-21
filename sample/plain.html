@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Plain</title>
+		<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" 
+			data-sap-ui-theme="sap_bluecrystal" 
+			data-sap-ui-libs="sap.m, spet.data.explorer" 
+			data-sap-ui-bindingSyntax="complex" 
+			data-sap-ui-compatVersion="edge" 
+			data-sap-ui-preload="async"
+			data-sap-ui-resourceroots='{"spet.data.explorer": "../src/spet/data/explorer"}'>
+		</script>
+	
+		<script id="myView" type="ui5/xmlview">
+			<mvc:View xmlns="sap.m" xmlns:spet="spet.data.explorer" xmlns:mvc="sap.ui.core.mvc">
+				<App>
+					<Page showHeader="false" enableScrolling="false">
+						<spet:Graph origins="R">
+							<spet:nodes>
+								<spet:Node id="R" label="R" />
+								<spet:Node id="A" label="A" />
+								<spet:Node id="B" label="B" />
+								<spet:Node id="C" label="C" tooltip="Tooltip" />
+								<spet:Node id="D" label="D" />
+								<spet:Node id="E" label="E" busy="true" />
+							</spet:nodes>
+							<spet:links>
+								<spet:Link source="R" target="A" />
+								<spet:Link source="R" target="B" />
+								<spet:Link source="A" target="C" />
+								<spet:Link source="A" target="D" />
+								<spet:Link source="D" target="E" />
+							</spet:links>
+						</spet:Graph>
+					</Page>
+				</App>
+			</mvc:View>
+		</script>
+		
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				"use strict";
+				var oView = sap.ui.xmlview({
+					viewContent: jQuery("#myView").html()
+				}).placeAt("content");
+				jQuery.sap.delayedCall(3000, null, function() {
+					oView.byId("E").setBusy(false);
+				});
+				jQuery.sap.delayedCall(2000, null, function() {
+					oView.byId("A").setBusy(true);
+				});
+			});
+		</script>
+	</head>
+<body class="sapUiBody" style="overflow:hidden">
+  <div id="content"></div>
+</body>
+</html>

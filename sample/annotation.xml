@@ -1,0 +1,136 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="NorthwindModel.Customer">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="CustomerID"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+				
+			<Annotations Target="NorthwindModel.Category">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="CategoryName"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			
+			<Annotations Target="NorthwindModel.Order">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="OrderID"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			
+			<Annotations Target="NorthwindModel.Order_Detail">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title">
+							<Apply Function="odata.concat">
+								<Path>OrderID</Path>
+								<String> </String>
+								<Path>ProductID</Path>
+							</Apply>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			
+			<Annotations Target="NorthwindModel.Product">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="ProductName"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="NorthwindModel.Product/Order_Details">
+				<Annotation Term="Common.Label" String="{@i18n>PRODUCT_ORDER_DETAILS}">
+				</Annotation>
+			</Annotations>
+			
+			<Annotations Target="NorthwindModel.Supplier">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="CompanyName"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="NorthwindModel.Employee">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title">
+							<Apply Function="odata.concat">
+								<Path>FirstName</Path>
+								<String> </String>
+								<Path>LastName</Path>
+							</Apply>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="NorthwindModel.Employee/Employee1">
+				<Annotation Term="Common.Label" String="{@i18n>EMPLOYEE_EMPLOYEE1}"/>
+			</Annotations>
+			<Annotations Target="NorthwindModel.Employee/Employees1">
+				<Annotation Term="Common.Label" String="{@i18n>EMPLOYEE_EMPLOYEE1S}"/>
+			</Annotations>
+
+			<Annotations Target="NorthwindModel.Territory">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="TerritoryID"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="NorthwindModel.Region">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="RegionID"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="NorthwindModel.Shipper">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="CompanyName"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="NorthwindModel.Shipper">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title" PropertyPath="CompanyName"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

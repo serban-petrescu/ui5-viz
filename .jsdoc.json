@@ -1,0 +1,35 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "plugins": [
+        "plugins/markdown",
+        "node_modules/jsdoc-babel"
+    ],
+    "babel": {
+        "presets": ["es2015"],
+        "plugins": ["transform-class-properties"]
+    },
+    "templates": {
+        "logoFile": "",
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "dateFormat": "dd.MM.yyyy",
+        "outputSourceFiles": true,
+        "outputSourcePath": true,
+        "systemName": "UI5 Visualization",
+        "footer": "",
+        "copyright": "Copyright � 2017 Serban Petrescu",
+        "navType": "vertical",
+        "theme": "lumen",
+        "linenums": true,
+        "collapseSymbols": false,
+        "inverseNav": true,
+        "protocol": "html://",
+        "methodHeadingReturns": false
+    },
+    "markdown": {
+        "parser": "gfm",
+        "hardwrap": true
+    }
+}

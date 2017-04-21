@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metadata</title>
+		<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" 
+			data-sap-ui-theme="sap_bluecrystal" 
+			data-sap-ui-libs="sap.m" 
+			data-sap-ui-bindingSyntax="complex" 
+			data-sap-ui-compatVersion="edge" 
+			data-sap-ui-preload="async"
+			data-sap-ui-resourceroots='{"spet.data.explorer": "../src/spet/data/explorer"}'>
+		</script>
+	
+		<script id="myView" type="ui5/xmlview">
+			<mvc:View xmlns="sap.m" xmlns:spet="spet.data.explorer" xmlns:mvc="sap.ui.core.mvc">
+				<App>
+					<Page showHeader="false" enableScrolling="false">
+						<HBox alignItems="Stretch" fitContainer="true">
+							<spet:MetadataExplorer>
+								<spet:layoutData>
+									<FlexItemData growFactor="1" />
+								</spet:layoutData>
+							</spet:MetadataExplorer>
+							<spet:MetadataExplorer origins="NorthwindModel.Order">
+								<spet:layoutData>
+									<FlexItemData growFactor="1" />
+								</spet:layoutData>
+							</spet:MetadataExplorer>
+						</HBox>
+					</Page>
+				</App>
+			</mvc:View>
+		</script>
+		
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				"use strict";
+				var SERVICE_PATH = window.location.hostname === "localhost" ? "/V2/Northwind/Northwind.svc/"
+					: "https://cors-anywhere.herokuapp.com/services.odata.org/V2/Northwind/Northwind.svc/";
+				var oModel = new sap.ui.model.odata.v2.ODataModel(SERVICE_PATH);
+				sap.ui.xmlview({
+					viewContent: jQuery("#myView").html()
+				}).setModel(oModel).placeAt("content");
+			});
+		</script>
+	</head>
+<body class="sapUiBody" style="overflow:hidden">
+  <div id="content"></div>
+</body>
+</html>

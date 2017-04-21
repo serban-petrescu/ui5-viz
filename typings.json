@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "openui5": "registry:dt/openui5#1.40.0+20161114082153"
+  }
+}
