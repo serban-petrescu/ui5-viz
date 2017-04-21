@@ -1,2 +1,2 @@
-# ui5-viz
-UI5 data visualization controls
+# UI5 Data Visualization
+A set of controls centered around the visualization of data.
