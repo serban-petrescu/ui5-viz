@@ -32,3 +32,5 @@ The `ODataExplorer` is a splecialized control for visualizing the contents of an
   - [odata](https://serban-petrescu.github.io/ui5-viz/sample/odata.html)
 - [jsDoc](http://serban-petrescu.github.io/ui5-viz/jsdoc/)
 - [latest build](http://serban-petrescu.github.io/ui5-viz/latest.zip)
+
+For a specific version of this library, check the [releases section](https://github.com/serban-petrescu/ui5-viz/releases).
