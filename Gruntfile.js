@@ -63,6 +63,9 @@ module.exports = function (grunt) {
 					rename: function(dest, src) {
 						return dest + src.replace('.js','-dbg.js');
 					}
+				}, {
+					src: "target/src/spet/data/explorer/.library",
+					dest: "dist/spet/data/explorer/.library"
 				}]
 			},
 			target: {
@@ -153,6 +156,7 @@ module.exports = function (grunt) {
 				},
 				files: [{
 					expand: true,
+					dot: true,
 					cwd: 'dist/',
 					src: '**/*',
 					dest: '.'
@@ -169,7 +173,22 @@ module.exports = function (grunt) {
 				},
 				files: [{
 					expand: true,
-					src: "target/src/spet/data/explorer/*.js",
+					dot: true,
+					src: "target/src/spet/data/explorer/*",
+					dest: "./"
+				}]
+			},
+			pages: {
+				options: {
+					patterns: [{
+						match: 'version',
+						replacement: oPackage.version
+					}]
+				},
+				files: [{
+					expand: true,
+					dot: true,
+					src: "pages/jsdoc/*",
 					dest: "./"
 				}]
 			}
@@ -192,5 +211,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['build', 'start']);
 	grunt.registerTask('save', ['copy:save', 'babel:save']);
 	grunt.registerTask('dist', ['build', 'clean:dist', 'openui5_preload', 'uglify', 'copy:dist', 'compress',
-		'jsdoc', 'copy:pages']);
+		'jsdoc', 'replace:pages', 'copy:pages']);
 };
