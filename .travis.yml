@@ -1,16 +1,23 @@
 language: node_js
 node_js:
-  - "7"
+- '7'
 before_script:
-  - npm install
+- npm install
 script: grunt dist
 cache:
   directories:
-    - node_modules
+  - node_modules
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: pages
-  on:
-    branch: master
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+      secure: 0fpHUDbb7I5iRj7gBuwbePO/gVbOHznsB9gG3hB7kMb54ijC8KIUtf0cs9QZ+19uFlOjwd3MM60TmJCOrtSrY5zw5aXAJJ/cCIv4EwIyaDq20S/be70vVEAYlLFlzWclGrb2Y3Db3sGdyAUKTg2HKwmvt1Sg83zEzHhp96vVYb/fZbb2HwiCdMCDYkdFGIk66gh5gy+/sZx0zxWAzW01DG/ZXAlfhkaPezTL1hEY3mYmquR34ea8ohSdZOh4cVptz2G3FgCYYcnXLJP6EtmHTrp6ABvj0oHpaDzOaY4JDWr3D0t+u6QJRyqPByIiyaJG7RILsIjBlWMQgcNhIasNs3lVybNZaLdLEsXwFCZoKfOXCe2suT4NL+CZ0l7si83ILPFDnuPuxaVGSfqUGsoO0r9VMHnS5xgyl2rb2ETo60gHOErGXsRc3/Ow5J2pGWk7uHJQb+DjlLOJF0DEonTI1fGcUfOew3AdFId+WPk7/qoMxFQbNGWjmRdER5H0pcZZoNgMVSw42vDOK493K1KaoRZFexrVigA6/8SzcuTh5ZcvrKrjndF216tnfv0yM83J2rsS015esWOrzrte2w9ZH79rB66j2o8j5nwWnESYnfCoilvN7hO/vKqccNwMAr7ROQyVwhRMC+r61UtUALeLc79HKcljKMa3JQV9/oEsN1U=
+    file: pages/latest.zip
+    on:
+      repo: serban-petrescu/ui5-viz
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: pages
+    on:
+      branch: master
