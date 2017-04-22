@@ -1,4 +1,4 @@
-# UI5 Data Visualization [![Build Status](https://travis-ci.org/serban-petrescu/ui5-viz.svg?branch=master)](https://travis-ci.org/serban-petrescu/ui5-viz) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
+# UI5 Data Visualization [![Build Status](https://travis-ci.org/serban-petrescu/ui5-viz.svg?branch=master)](https://travis-ci.org/serban-petrescu/ui5-viz) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/) [![GitHub Release](https://img.shields.io/github/release/serban-petrescu/ui5-viz.svg)](https://github.com/serban-petrescu/ui5-viz/releases) [![License](https://img.shields.io/github/license/serban-petrescu/ui5-viz.svg)](https://github.com/serban-petrescu/ui5-viz/blob/master/LICENSE)
 A set of controls centered around the visualization of data.
 
 ## Graph
