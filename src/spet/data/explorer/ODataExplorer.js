@@ -75,9 +75,11 @@ export default class ODataExplorer extends Control {
 			 * @event
 			 * @name spet.data.explorer.ODataExplorer#addEntity
 			 * @property {string} entityPath The model path of the entity.
+			 * @property {spet.data.explorer.Node} node The new node.
 			 */
 			addEntity: {
-				entityPath: { type: "string" }
+				entityPath: { type: "string" },
+				node: { type: "spet.data.explorer.Node" }
 			},
 
 			/**
@@ -368,9 +370,9 @@ export default class ODataExplorer extends Control {
 		 */
 		let fnAdd = (oNode, oContext) => {
 			sPath = oContext.getPath();
-			if (this.fireEvent("addEntity", { entityPath: sPath }, true)) {
-				oNode.setKey(sPath);
-				oNode.setEntity(sPath);
+			oNode.setKey(sPath);
+			oNode.setEntity(sPath);
+			if (this.fireEvent("addEntity", { entityPath: sPath, node: oNode}, true)) {
 				oGraph.addNode(oNode);
 				oDeferred.resolve(oNode);
 			} else {
