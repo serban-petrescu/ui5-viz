@@ -34,3 +34,5 @@ The `ODataExplorer` is a splecialized control for visualizing the contents of an
 - [latest build](http://serban-petrescu.github.io/ui5-viz/latest.zip)
 
 For a specific version of this library, check the [releases section](https://github.com/serban-petrescu/ui5-viz/releases).
+
+You can also cosume this library through bower: `bower install spet-ui5-viz`.
