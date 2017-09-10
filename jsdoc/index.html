@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>UI5 Visualization Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.lumen.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">UI5 Visualization</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.html">spet.data.explorer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.Graph.html">spet.data.explorer.Graph</a></li><li><a href="spet.data.explorer.KeyLink.html">spet.data.explorer.KeyLink</a></li><li><a href="spet.data.explorer.KeyNode.html">spet.data.explorer.KeyNode</a></li><li><a href="spet.data.explorer.Link.html">spet.data.explorer.Link</a></li><li><a href="spet.data.explorer.MetadataExplorer.html">spet.data.explorer.MetadataExplorer</a></li><li><a href="spet.data.explorer.Node.html">spet.data.explorer.Node</a></li><li><a href="spet.data.explorer.ODataExplorer.html">spet.data.explorer.ODataExplorer</a></li><li><a href="spet.data.explorer.ODataLink.html">spet.data.explorer.ODataLink</a></li><li><a href="spet.data.explorer.ODataNode.html">spet.data.explorer.ODataNode</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.KeyNode.html#event:detail">spet.data.explorer.KeyNode#event:detail</a></li><li><a href="spet.data.explorer.KeyNode.html#event:expand">spet.data.explorer.KeyNode#event:expand</a></li><li><a href="spet.data.explorer.MetadataExplorer.html#event:detail">spet.data.explorer.MetadataExplorer#event:detail</a></li><li><a href="spet.data.explorer.Node.html#event:detail">spet.data.explorer.Node#event:detail</a></li><li><a href="spet.data.explorer.Node.html#event:expand">spet.data.explorer.Node#event:expand</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:addEntity">spet.data.explorer.ODataExplorer#event:addEntity</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:addNavigation">spet.data.explorer.ODataExplorer#event:addNavigation</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:detailEntity">spet.data.explorer.ODataExplorer#event:detailEntity</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:detailNavigation">spet.data.explorer.ODataExplorer#event:detailNavigation</a></li><li><a href="spet.data.explorer.ODataNode.html#event:detail">spet.data.explorer.ODataNode#event:detail</a></li><li><a href="spet.data.explorer.ODataNode.html#event:expand">spet.data.explorer.ODataNode#event:expand</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>UI5 Data Visualization <a href="https://travis-ci.org/serban-petrescu/ui5-viz"><img src="https://travis-ci.org/serban-petrescu/ui5-viz.svg?branch=master" alt="Build Status"></a> <a href="https://gruntjs.com/"><img src="https://cdn.gruntjs.com/builtwith.svg" alt="Built with Grunt"></a> <a href="https://github.com/serban-petrescu/ui5-viz/releases"><img src="https://img.shields.io/github/release/serban-petrescu/ui5-viz.svg" alt="GitHub Release"></a> <a href="https://github.com/serban-petrescu/ui5-viz/blob/master/LICENSE"><img src="https://img.shields.io/github/license/serban-petrescu/ui5-viz.svg" alt="License"></a></h1><p>A set of controls centered around the visualization of data.</p>
+<h2>Graph</h2><h3>Plain</h3><p>The core control of this library is the <code>Graph</code> control. It can represent an (un)directed graph with the help of two aggregations: <code>Nodes</code> and <code>Links</code>. The <code>Graph</code> control is based on the <a href="https://bl.ocks.org/mbostock/4062045">d3 force-directed graph</a>.</p>
+<p>Each link has two associated nodes and may have a label. Nodes may be expanded or collapsed by clicking on them. Further details for a node may be displayed with the help of the <code>details</code> event (based on the HTML <code>contextmenu</code> event: left-click on desktops, long tap on mobiles). Nodes also may be in a busy state, when they display a busy indicator.</p>
+<p><a href="https://serban-petrescu.github.io/ui5-viz/sample/plain.html">Sample</a>.</p>
+<h3>Key Based</h3><p>The plain approach has one major downside: the links between nodes are done via UI5 associations. This means that it is not suitable for data binding. To overcome this, two specialized classes are provided: <code>KeyNode</code> and <code>KeyLink</code>. Each <code>KeyNode</code> must have a unique key (unique inside the graph) and each <code>KeyLink</code> stored the keys of two nodes. This representation is more suitable for data binding, because the keys are properties of both the nodes and the links.</p>
+<p><a href="https://serban-petrescu.github.io/ui5-viz/sample/keys.html">Sample</a>.</p>
+<h2>OData Metadata Explorer</h2><p>The <code>MetadataExplorer</code> is a specialized control for visualizing the metadata of an OData service. For each OData entity type a node is created and for each OData association a link between the associated entity types is created. The explorer may either display all the nodes at once or it can start with a subset of <code>root</code> nodes, allowing the user to expand and collapse the further nodes.</p>
+<p><a href="https://serban-petrescu.github.io/ui5-viz/sample/meta.html">Sample</a> (left - all nodes; right - root nodes).</p>
+<h2>OData Explorer</h2><p>The <code>ODataExplorer</code> is a splecialized control for visualizing the contents of an OData service. It starts from a root entity given as a path in the model. The user may expand each node to obtain the related nodes (linked through a navigation property). For single-cardinality navigation properties, a simple link is created between the nodes. For multiple-cardinality navigation properties, a dedicated node is used to represent the navigation property. Paging is also enabled by creating a dedicated 'More' node (similar mechanism as for the UI5 growing list).</p>
+<p><a href="https://serban-petrescu.github.io/ui5-viz/sample/odata.html">Sample</a> (the root node may be changed with the context menu).</p>
+<h2>Links</h2><ul>
+<li>samples (the OData ones are based on the Northwind sample service; it may take a while to load):<ul>
+<li><a href="https://serban-petrescu.github.io/ui5-viz/sample/plain.html">plain</a></li>
+<li><a href="https://serban-petrescu.github.io/ui5-viz/sample/keys.html">keys</a></li>
+<li><a href="https://serban-petrescu.github.io/ui5-viz/sample/meta.html">meta</a></li>
+<li><a href="https://serban-petrescu.github.io/ui5-viz/sample/odata.html">odata</a></li>
+</ul>
+</li>
+<li><a href="http://serban-petrescu.github.io/ui5-viz/jsdoc/">jsDoc</a></li>
+<li><a href="http://serban-petrescu.github.io/ui5-viz/latest.zip">latest build</a></li>
+</ul>
+<p>For a specific version of this library, check the <a href="https://github.com/serban-petrescu/ui5-viz/releases">releases section</a>.</p>
+<p>You can also cosume this library through bower: <code>bower install spet-ui5-viz</code>.</p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright � 2017 Serban Petrescu
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on Su.09.yyyy
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

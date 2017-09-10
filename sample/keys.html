@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Keys</title>
+		<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" 
+			data-sap-ui-theme="sap_bluecrystal" 
+			data-sap-ui-libs="sap.m" 
+			data-sap-ui-bindingSyntax="complex" 
+			data-sap-ui-compatVersion="edge" 
+			data-sap-ui-preload="async"
+			data-sap-ui-resourceroots='{"spet.data.explorer": "../src/spet/data/explorer"}'>
+		</script>
+	
+		<script id="myView" type="ui5/xmlview">
+			<mvc:View xmlns="sap.m" xmlns:spet="spet.data.explorer" xmlns:mvc="sap.ui.core.mvc">
+				<App>
+					<Page showHeader="false" enableScrolling="false">
+						<spet:Graph nodes="{/nodes}" links="{/links}">
+							<spet:nodes>
+								<spet:KeyNode tooltip="{label}" key="{key}" 
+									label="{label}" origin="{= ${key} === 'R' }" />
+							</spet:nodes>
+							<spet:links>
+								<spet:KeyLink sourceKey="{sourceKey}" targetKey="{targetKey}" />
+							</spet:links>
+						</spet:Graph>
+					</Page>
+				</App>
+			</mvc:View>
+		</script>
+		
+		<script id="myModel" type="ui5/jsonmodel">
+			{
+				"nodes": [
+					{"key": "R", "label": "R"},
+					{"key": "A", "label": "A"},
+					{"key": "B", "label": "B"},
+					{"key": "C", "label": "C"},
+					{"key": "D", "label": "D"},
+					{"key": "E", "label": "E"}
+				],
+				"links": [
+					{"sourceKey": "R", "targetKey": "A"},
+					{"sourceKey": "R", "targetKey": "B"},
+					{"sourceKey": "A", "targetKey": "C"},
+					{"sourceKey": "A", "targetKey": "D"},
+					{"sourceKey": "D", "targetKey": "E"}
+				]
+			}
+		</script>
+		
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				"use strict";
+				var oModel = new sap.ui.model.json.JSONModel(JSON.parse(jQuery("#myModel").html()));
+				sap.ui.xmlview({
+					viewContent: jQuery("#myView").html()
+				}).setModel(oModel).placeAt("content");
+			});
+		</script>
+	</head>
+<body class="sapUiBody" style="overflow:hidden">
+  <div id="content"></div>
+</body>
+</html>

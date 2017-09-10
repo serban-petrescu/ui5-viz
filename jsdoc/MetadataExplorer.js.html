@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>UI5 Visualization Source: MetadataExplorer.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.lumen.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">UI5 Visualization</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.html">spet.data.explorer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.Graph.html">spet.data.explorer.Graph</a></li><li><a href="spet.data.explorer.KeyLink.html">spet.data.explorer.KeyLink</a></li><li><a href="spet.data.explorer.KeyNode.html">spet.data.explorer.KeyNode</a></li><li><a href="spet.data.explorer.Link.html">spet.data.explorer.Link</a></li><li><a href="spet.data.explorer.MetadataExplorer.html">spet.data.explorer.MetadataExplorer</a></li><li><a href="spet.data.explorer.Node.html">spet.data.explorer.Node</a></li><li><a href="spet.data.explorer.ODataExplorer.html">spet.data.explorer.ODataExplorer</a></li><li><a href="spet.data.explorer.ODataLink.html">spet.data.explorer.ODataLink</a></li><li><a href="spet.data.explorer.ODataNode.html">spet.data.explorer.ODataNode</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="spet.data.explorer.KeyNode.html#event:detail">spet.data.explorer.KeyNode#event:detail</a></li><li><a href="spet.data.explorer.KeyNode.html#event:expand">spet.data.explorer.KeyNode#event:expand</a></li><li><a href="spet.data.explorer.MetadataExplorer.html#event:detail">spet.data.explorer.MetadataExplorer#event:detail</a></li><li><a href="spet.data.explorer.Node.html#event:detail">spet.data.explorer.Node#event:detail</a></li><li><a href="spet.data.explorer.Node.html#event:expand">spet.data.explorer.Node#event:expand</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:addEntity">spet.data.explorer.ODataExplorer#event:addEntity</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:addNavigation">spet.data.explorer.ODataExplorer#event:addNavigation</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:detailEntity">spet.data.explorer.ODataExplorer#event:detailEntity</a></li><li><a href="spet.data.explorer.ODataExplorer.html#event:detailNavigation">spet.data.explorer.ODataExplorer#event:detailNavigation</a></li><li><a href="spet.data.explorer.ODataNode.html#event:detail">spet.data.explorer.ODataNode#event:detail</a></li><li><a href="spet.data.explorer.ODataNode.html#event:expand">spet.data.explorer.ODataNode#event:expand</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: MetadataExplorer.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">import jQuery from "jquery.sap.global";
+import Control from "sap/ui/core/Control";
+import Component from "sap/ui/core/Component";
+import AnnotationHelper from "sap/ui/model/odata/AnnotationHelper";
+import Graph from "./Graph";
+import KeyNode from "./KeyNode";
+import KeyLink from "./KeyLink";
+
+/**
+ * Control for exploring the metadata of an OData model.
+ * This control is based on an underlying Graph.
+ * Each entity type is represented through a node and each
+ * association through a link.
+ * @class
+ * @name spet.data.explorer.MetadataExplorer
+ */
+export default class MetadataExplorer extends Control {
+	metadata = {
+		properties: {
+			/**
+			 * The width of the control.
+			 * @type {sap.ui.core.CSSSize}
+			 * @default "100%"
+			 * @name spet.data.explorer.MetadataExplorer#width
+			 */
+			width: { type: "sap.ui.core.CSSSize", defaultValue: "100%" },
+
+			/**
+			 * The height of the control.
+			 * @type {sap.ui.core.CSSSize}
+			 * @default "100%"
+			 * @name spet.data.explorer.MetadataExplorer#height
+			 */
+			height: { type: "sap.ui.core.CSSSize", defaultValue: "100%" },
+
+			/**
+			 * An array of fully qualified entity names which should serve as roots.
+			 * If no entities are given, then all the entities are considered to be roots.
+			 * @type {string[]}
+			 * @default []
+			 * @name spet.data.explorer.MetadataExplorer#origins
+			 */
+			origins: { type: "string[]", defaultValue: [] },
+
+			/**
+			 * The name of the OData model whose metadata should be used.
+			 * @type {string}
+			 * @default undefined
+			 * @name spet.data.explorer.MetadataExplorer#modelName
+			 */
+			modelName: { type: "string", defaultValue: undefined }
+		},
+		aggregations: {
+			/**
+			 * The undelying graph.
+			 * @private
+			 * @type {spet.data.explorer.Graph}
+			 * @name spet.data.explorer.MetadataExplorer#_graph
+			 */
+			_graph: { type: "spet.data.explorer.Graph", multiple: false, visibility: "hidden" }
+		},
+		events: {
+			/**
+			 * Fired when details are requested for a node (context menu request).
+			 * @event
+			 * @name spet.data.explorer.MetadataExplorer#detail
+			 * @property {object} dom The DOM reference of the node.
+			 * @property {string} entityType The fully qualified entity type name.
+			 */
+			detail: {
+				dom: { type: "object" },
+				entityType: { type: "string" }
+			}
+		}
+	}
+
+	init() {
+		this.setAggregation("_graph", new Graph({ directed: false }));
+		this.attachModelContextChange(() => {
+			let sName = this.getModelName(),
+				oComponent = Component.getOwnerComponentFor(this),
+				oModel = this.getModel(sName) || (oComponent &amp;&amp; oComponent.getModel(sName));
+			if (oModel) {
+				this.build(oModel);
+			}
+		});
+	}
+
+	/**
+	 * Builds the nodes and links for a given ODataModel.
+	 * @method spet.data.explorer.MetadataExplorer#build
+	 * @protected
+	 * @param {sap.ui.model.odata.v2.ODataModel} oModel The OData model.
+	 * @returns {void}
+	 */
+	build(oModel) {
+		var oMeta = oModel &amp;&amp; oModel.getMetaModel(),
+			fnLabel = sPath => {
+				let oMdlCtxt = oMeta.createBindingContext(sPath + "/com.sap.vocabularies.Common.v1.Label");
+				return (oMdlCtxt &amp;&amp; AnnotationHelper.format(oMdlCtxt)) || oMeta.getProperty(sPath + "/name");
+			},
+			fnFqName = oEnt => oEnt.namespace + "." + oEnt.name;
+		oMeta.loaded().then(() => {
+			var aSchemas = oMeta.getProperty("/dataServices/schema") || [],
+				aEntities = [].concat(...jQuery.map(aSchemas, m => m.entityType || [])),
+				aAssocs = [].concat(...jQuery.map(aSchemas, m => m.association || [])),
+				oGraph = this.getAggregation("_graph");
+			oGraph.removeAllNodes();
+			oGraph.removeAllLinks();
+			jQuery.each(aEntities, (i, oEnt) => oGraph.addNode(new KeyNode({
+				key: fnFqName(oEnt),
+				label: fnLabel(oMeta.getODataEntityType(fnFqName(oEnt), true))
+			})));
+			jQuery.each(aAssocs, (i, oA) => oGraph.addLink(new KeyLink({
+				sourceKey: oA.end[0].type,
+				targetKey: oA.end[1].type
+			})));
+			this.updateOrigins();
+		});
+	}
+
+	setOrigins(aOrigins) {
+		this.setProperty("origins", aOrigins);
+		this.updateOrigins();
+	}
+
+	/**
+	 * Updates the nodes of the graph based on the origins property.
+	 * @method spet.data.explorer.MetadataExplorer#updateOrigins
+	 * @protected
+	 * @returns {void}
+	 */
+	updateOrigins() {
+		var aOrigins = this.getOrigins() || [],
+			oGraph = this.getAggregation("_graph");
+		if (aOrigins.length) {
+			jQuery.each(oGraph.getNodes() || [], (i, oN) => {
+				oN.setOrigin(aOrigins.indexOf(oN.getKey()) >= 0);
+				oN.setExpanded(false);
+				oN.setExpandable(true);
+			});
+		} else {
+			jQuery.each(oGraph.getNodes() || [], (i, oN) => {
+				oN.setOrigin(true);
+				oN.setExpanded(true);
+				oN.setExpandable(false);
+			});
+		}
+	}
+
+	/**
+	 * The renderer of the control. Wraps the graph inside a DIV.
+	 * @ignore
+	 * @param {sap.ui.core.RenderManager} oRM The render manager.
+	 * @param {sap.ui.core.Control} oControl The explorer.
+	 * @returns {void}
+	 */
+	renderer(oRM, oControl) {
+		oRM.write("&lt;div");
+		oRM.writeControlData(oControl);
+		oRM.addStyle("height", oControl.getHeight());
+		oRM.addStyle("width", oControl.getWidth());
+		oRM.writeStyles();
+		oRM.write(">");
+		oRM.renderControl(oControl.getAggregation("_graph"));
+		oRM.write("&lt;/div>");
+	}
+}</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright � 2017 Serban Petrescu
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on Su.09.yyyy
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
