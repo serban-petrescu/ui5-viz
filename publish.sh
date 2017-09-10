@@ -5,7 +5,7 @@ if [ ! -z "$TRAVIS_TAG" ]; then
     git clone https://github.com/serban-petrescu/packaged-ui5-viz.git
 
     cp -r dist/* packaged-ui5-viz/
-    cp pacakge.json packaged-ui5-viz/pacakge.json
+    cp package.json packaged-ui5-viz/pacakge.json
     cd packaged-ui5-viz
 
     git remote rm origin
